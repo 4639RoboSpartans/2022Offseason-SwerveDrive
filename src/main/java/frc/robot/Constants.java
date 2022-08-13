@@ -21,6 +21,10 @@ public final class Constants {
     public static final int RotaterMotor3 = 6;
     public static final int DriverMotor4 =7;
     public static final int RotaterMotor4 = 8;
+	public static final int ModEncoder1 = 9;
+	public static final int ModEncoder2 = 10;
+	public static final int ModEncoder3 = 11;
+	public static final int ModEncoder4 = 12;
 
     public static final int NUMBER_OF_CONTROLLERS = 2;
     public static final double DEADZONE_VALUE = 0.01;

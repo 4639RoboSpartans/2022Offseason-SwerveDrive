@@ -31,10 +31,10 @@ public class DriveSubsystem extends SubsystemBase {
     public AHRS navx = new AHRS();
     public SwerveDriveOdometry m_odometry;
     public DriveSubsystem(){
-        SwerveMod1FrontRight = new SwerveModule(Constants.DriverMotor1, Constants.RotaterMotor1);
-        SwerveMod2FrontLeft = new SwerveModule(Constants.DriverMotor2, Constants.RotaterMotor2);
-        SwerveMod3RearLeft = new SwerveModule(Constants.DriverMotor3, Constants.RotaterMotor3);
-        SwerveMod4RearRight = new SwerveModule(Constants.DriverMotor4, Constants.RotaterMotor4);
+        SwerveMod1FrontRight = new SwerveModule(Constants.DriverMotor1, Constants.RotaterMotor1, Constants.ModEncoder1);
+        SwerveMod2FrontLeft = new SwerveModule(Constants.DriverMotor2, Constants.RotaterMotor2, Constants.ModEncoder2);
+        SwerveMod3RearLeft = new SwerveModule(Constants.DriverMotor3, Constants.RotaterMotor3, Constants.ModEncoder3);
+        SwerveMod4RearRight = new SwerveModule(Constants.DriverMotor4, Constants.RotaterMotor4, Constants.ModEncoder4);
         navx.calibrate();
         m_odometry=new SwerveDriveOdometry(m_kinematics,
         navx.getRotation2d());

@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.OI;
@@ -20,6 +21,7 @@ public class DriveCommand extends CommandBase{
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        printValues();
         FWD = m_oi.getAxis(1, Constants.Axes.LEFT_STICK_Y);
         STR = m_oi.getAxis(1, Constants.Axes.LEFT_STICK_X);
         RCW = m_oi.getAxis(1, Constants.Axes.RIGHT_STICK_X);
@@ -67,10 +69,10 @@ public class DriveCommand extends CommandBase{
             ws3/=max; 
             ws4/=max;
         } 
-        m_drive.setModule1(ws1, wa1);
-        m_drive.setModule2(ws2, wa2);
-        m_drive.setModule3(ws3, wa3);
-        m_drive.setModule4(ws4, wa4);
+        // m_drive.setModule1(ws1, wa1);
+        // m_drive.setModule2(ws2, wa2);
+        // m_drive.setModule3(ws3, wa3);
+        // m_drive.setModule4(ws4, wa4);
         
     }
 
@@ -84,5 +86,16 @@ public class DriveCommand extends CommandBase{
     @Override
     public boolean isFinished() {
         return false;
+    }
+    public void printValues(){
+        SmartDashboard.putNumber("Encoder1", m_drive.SwerveMod1FrontRight.getDegrees());
+        SmartDashboard.putNumber("Encoder2", m_drive.SwerveMod2FrontLeft.getDegrees());
+        SmartDashboard.putNumber("Encoder3", m_drive.SwerveMod3RearLeft.getDegrees());
+        SmartDashboard.putNumber("Encoder4", m_drive.SwerveMod4RearRight.getDegrees());
+        SmartDashboard.putNumber("RobotHeading", m_drive.getHeading());
+        SmartDashboard.putNumber("LeftStickX", m_oi.getAxis(0, Constants.Axes.LEFT_STICK_X));
+        SmartDashboard.putNumber("LeftStickY", m_oi.getAxis(0, Constants.Axes.LEFT_STICK_Y));
+        SmartDashboard.putNumber("RightStickX", m_oi.getAxis(0, Constants.Axes.RIGHT_STICK_X));
+        SmartDashboard.putNumber("RightStickY", m_oi.getAxis(0, Constants.Axes.RIGHT_STICK_Y));
     }
 }

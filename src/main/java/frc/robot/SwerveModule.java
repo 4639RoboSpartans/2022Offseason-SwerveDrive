@@ -4,20 +4,24 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.sensors.CANCoder;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
 
 public class SwerveModule {
     private WPI_TalonFX driver;
     private WPI_TalonFX rotator;
+    private CANCoder modEnc;
     private PIDController pid;
     private int kp=0;
     private int ki=0;
     private int kd=0;
-    public SwerveModule(int driverInd, int rotateInd){
+    public SwerveModule(int driverInd, int rotateInd, int channel){
         driver = new WPI_TalonFX(driverInd);
         rotator = new WPI_TalonFX(rotateInd);
+        modEnc = new CANCoder(channel);
         driver.configFactoryDefault();
         rotator.configFactoryDefault();
         driver.setNeutralMode(NeutralMode.Coast);
