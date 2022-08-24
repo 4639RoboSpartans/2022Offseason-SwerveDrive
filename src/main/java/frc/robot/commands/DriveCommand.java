@@ -10,6 +10,7 @@ public class DriveCommand extends CommandBase{
     private DriveSubsystem m_drive;
     private OI m_oi;
     double FWD, STR, RCW;
+    double wa1=0,wa2=0,wa3=0,wa4=0;
     public DriveCommand(DriveSubsystem m_drive, OI oi){
         this.m_drive =m_drive;
         m_oi = oi;
@@ -22,11 +23,11 @@ public class DriveCommand extends CommandBase{
     @Override
     public void execute() {
         printValues();
-        FWD = m_oi.getAxis(1, Constants.Axes.LEFT_STICK_Y);
-        STR = m_oi.getAxis(1, Constants.Axes.LEFT_STICK_X);
-        RCW = m_oi.getAxis(1, Constants.Axes.RIGHT_STICK_X);
+        FWD = m_oi.getAxis(0, Constants.Axes.LEFT_STICK_Y);
+        STR = m_oi.getAxis(0, Constants.Axes.LEFT_STICK_X);
+        RCW = m_oi.getAxis(0, Constants.Axes.RIGHT_STICK_X);
         double temp = FWD*Math.cos(m_drive.getHeadingRadians())+STR*Math.sin(m_drive.getHeadingRadians());
-        STR = FWD*Math.sin(m_drive.getHeadingRadians())+STR*Math.cos(m_drive.getHeadingRadians());
+        STR = -FWD*Math.sin(m_drive.getHeadingRadians())+STR*Math.cos(m_drive.getHeadingRadians());
         FWD = temp;
 
         double R = Math.sqrt(Math.pow(Constants.trackwidth,2)+Math.pow(Constants.wheelbase,2));
@@ -40,24 +41,32 @@ public class DriveCommand extends CommandBase{
         double ws3 = Math.sqrt(Math.pow(A,2)+Math.pow(D,2));
         double ws4 = Math.sqrt(Math.pow(A,2)+Math.pow(C,2));
 
-        double wa1 = Math.atan2(B,C)*180/Math.PI;
-        double wa2 = Math.atan2(B,D)*180/Math.PI;
-        double wa3 = Math.atan2(A,D)*180/Math.PI;
-        double wa4 = Math.atan2(A,C)*180/Math.PI;
+        if(ws3>0.05||ws3<-0.05){
+        wa1 = Math.atan2(B,C)*180/Math.PI;
+        }
+        if(ws3>0.05||ws3<-0.05){
+        wa2 = Math.atan2(B,D)*180/Math.PI;
+        }
+        if(ws3>0.05||ws3<-0.05){
+        wa3 = Math.atan2(A,D)*180/Math.PI;
+        }
+        if(ws3>0.05||ws3<-0.05){
+        wa4 = Math.atan2(A,C)*180/Math.PI;
+        }
         //1 is FR, 2 is FL, 3 is RL, 4 is RR
 
-        if(wa1<0){
-            wa1+=360;
-        }
-        if(wa2<0){
-            wa2+=360;
-        }
-        if(wa3<0){
-            wa3+=360;
-        }
-        if(wa4<0){
-            wa4+=360;
-        }
+        // if(wa1<0){
+        //     wa1+=360;
+        // }
+        // if(wa2<0){
+        //     wa2+=360;
+        // }
+        // if(wa3<0){
+        //     wa3+=360;
+        // }
+        // if(wa4<0){
+        //     wa4+=360;
+        // }
 
         double max = ws1;
         if(ws2>max)max=ws2; 
@@ -67,12 +76,16 @@ public class DriveCommand extends CommandBase{
             ws1/=max; 
             ws2/=max; 
             ws3/=max; 
-            ws4/=max;
+            ws4/=max;  
         } 
-        // m_drive.setModule1(ws1, wa1);
-        // m_drive.setModule2(ws2, wa2);
-        // m_drive.setModule3(ws3, wa3);
-        // m_drive.setModule4(ws4, wa4);
+        // ws4 = ws3 = ws2 = ws1;
+        SmartDashboard.putNumber("Speed",ws3);
+        SmartDashboard.putNumber("Rotation", wa3);
+        
+        m_drive.setModule1(ws1*0.4, -wa1);
+        m_drive.setModule2(ws2*0.4, -wa2);
+        m_drive.setModule3(ws3*0.4, -wa3);
+        m_drive.setModule4(ws4*0.4, -wa4);
         
     }
 

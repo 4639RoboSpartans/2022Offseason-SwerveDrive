@@ -23,15 +23,15 @@ public final class Constants {
     public static final int RotaterMotor4 = 8;
 	public static final int ModEncoder1 = 9;
 	public static final int ModEncoder2 = 10;
-	public static final int ModEncoder3 = 11;
-	public static final int ModEncoder4 = 12;
+	public static final int ModEncoder3 = 12;
+	public static final int ModEncoder4 = 11;
 
     public static final int NUMBER_OF_CONTROLLERS = 2;
     public static final double DEADZONE_VALUE = 0.01;
-	public static final double trackwidth = 0;
-	public static final double wheelbase =0;
+	public static final double trackwidth = 0.44;
+	public static final double wheelbase =0.44;
     public enum Axes {
-		LEFT_STICK_X(0), LEFT_STICK_Y(4), LEFT_TRIGGER(2), RIGHT_TRIGGER(3), RIGHT_STICK_X(1), RIGHT_STICK_Y(5);
+		LEFT_STICK_X(0), LEFT_STICK_Y(1), LEFT_TRIGGER(2), RIGHT_TRIGGER(3), RIGHT_STICK_X(4), RIGHT_STICK_Y(5);
 
 		private final int value;
 

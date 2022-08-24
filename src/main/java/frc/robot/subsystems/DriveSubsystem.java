@@ -1,9 +1,13 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.sensors.CANCoder;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -11,6 +15,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+// import frc.robot.SwerveModule;
 import frc.robot.SwerveModule;
 
 public class DriveSubsystem extends SubsystemBase {
@@ -58,19 +63,21 @@ public class DriveSubsystem extends SubsystemBase {
         SwerveMod4RearRight.stop();
     }
     public void setModule1(double speed, double rotation){
-        SwerveMod1FrontRight.setSpeed(speed);
-        SwerveMod1FrontRight.setDegrees(rotation);
+        SwerveMod1FrontRight.set(speed, rotation);
     }
     public void setModule2(double speed, double rotation){
-        SwerveMod2FrontLeft.setSpeed(speed);
-        SwerveMod2FrontLeft.setDegrees(rotation);
+        SwerveMod2FrontLeft.set(speed, rotation);
     }
     public void setModule3(double speed, double rotation){
-        SwerveMod3RearLeft.setSpeed(speed);
-        SwerveMod3RearLeft.setDegrees(rotation);
+        SwerveMod3RearLeft.set(speed, rotation);
     }
     public void setModule4(double speed, double rotation){
-        SwerveMod4RearRight.setSpeed(speed);
-        SwerveMod4RearRight.setDegrees(rotation);
+        SwerveMod4RearRight.set(speed, rotation);
+    }
+    public void resetEncoders(){
+        SwerveMod1FrontRight.resetEncoder();
+        SwerveMod2FrontLeft.resetEncoder();
+        SwerveMod3RearLeft.resetEncoder();
+        SwerveMod4RearRight.resetEncoder();
     }
 }
