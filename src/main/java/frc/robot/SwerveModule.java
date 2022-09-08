@@ -18,8 +18,8 @@ public class SwerveModule {
     private WPI_TalonFX rotator;
     private CANCoder modEnc;
     private PIDController pid;
-    private double kp=0.05;//0.07;
-    private double ki=0.1;
+    private double kp=0.08;//0.07;
+    private double ki=0.15;
     private int kd=0;
     public SwerveModule(int driverInd, int rotateInd, int channel){
         driver = new WPI_TalonFX(driverInd);
@@ -32,6 +32,7 @@ public class SwerveModule {
         driver.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         modEnc = new CANCoder(channel);
         pid = new PIDController(kp, ki, kd);
+        pid.setTolerance(1);
 
         modEnc.setPosition(0);
     }

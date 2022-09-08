@@ -78,14 +78,17 @@ public class DriveCommand extends CommandBase{
             ws3/=max; 
             ws4/=max;  
         } 
+        if(RCW==0){
+            ws1=ws2=ws3=ws4;
+        }
         // ws4 = ws3 = ws2 = ws1;
         SmartDashboard.putNumber("Speed",ws3);
         SmartDashboard.putNumber("Rotation", wa3);
         
-        m_drive.setModule1(ws1*0.4, -wa1);
-        m_drive.setModule2(ws2*0.4, -wa2);
-        m_drive.setModule3(ws3*0.4, -wa3);
-        m_drive.setModule4(ws4*0.4, -wa4);
+        m_drive.setModule1(ws1*0.7, -wa1);
+        m_drive.setModule2(ws2*0.7, -wa2);
+        m_drive.setModule3(ws3*0.7, -wa3);
+        m_drive.setModule4(ws4*0.7, -wa4);
         
     }
 
