@@ -61,16 +61,16 @@ public class DriveSubsystem extends SubsystemBase {
     }
 
     public void setModule1(double speed, double rotation){
-        SwerveMod1FrontRight.set(speed, rotation);
+        SwerveMod1FrontRight.setDesiredState(new SwerveModuleState(speed, Rotation2d.fromDegrees(rotation)));
     }
     public void setModule2(double speed, double rotation){
-        SwerveMod2FrontLeft.set(speed, rotation);
+        SwerveMod2FrontLeft.setDesiredState(new SwerveModuleState(speed, Rotation2d.fromDegrees(rotation)));
     }
     public void setModule3(double speed, double rotation){
-        SwerveMod3RearLeft.set(speed, rotation);
+        SwerveMod3RearLeft.setDesiredState(new SwerveModuleState(speed, Rotation2d.fromDegrees(rotation)));
     }
     public void setModule4(double speed, double rotation){
-        SwerveMod4RearRight.set(speed, rotation);
+        SwerveMod4RearRight.setDesiredState(new SwerveModuleState(speed, Rotation2d.fromDegrees(rotation)));
     }
 
     public void setModuleStates(SwerveModuleState[] states){
@@ -81,10 +81,10 @@ public class DriveSubsystem extends SubsystemBase {
             }
         }
 
-        SwerveMod1FrontRight.set(states[0].speedMetersPerSecond, states[0].angle.getDegrees());
-        SwerveMod2FrontLeft.set(states[1].speedMetersPerSecond, states[1].angle.getDegrees());
-        SwerveMod3RearLeft.set(states[2].speedMetersPerSecond, states[2].angle.getDegrees());
-        SwerveMod4RearRight.set(states[3].speedMetersPerSecond, states[3].angle.getDegrees());
+        SwerveMod1FrontRight.setDesiredState(new SwerveModuleState(states[0].speedMetersPerSecond, Rotation2d.fromDegrees(states[0].angle.getDegrees())));
+        SwerveMod2FrontLeft.setDesiredState(new SwerveModuleState(states[1].speedMetersPerSecond, Rotation2d.fromDegrees(states[1].angle.getDegrees())));
+        SwerveMod3RearLeft.setDesiredState(new SwerveModuleState(states[2].speedMetersPerSecond, Rotation2d.fromDegrees(states[2].angle.getDegrees())));
+        SwerveMod4RearRight.setDesiredState(new SwerveModuleState(states[3].speedMetersPerSecond, Rotation2d.fromDegrees(states[3].angle.getDegrees())));
     }
 
     public void resetEncoders(){

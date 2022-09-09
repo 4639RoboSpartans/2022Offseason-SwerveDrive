@@ -49,10 +49,6 @@ public class SwerveModule {
         rotator.setVoltage(-pid.calculate(getRotationInDegrees(), degrees));
     }
 
-    public void set(double speed, double degrees){
-        setDesiredState(new SwerveModuleState(speed, Rotation2d.fromDegrees(degrees)));
-    }
-
     public double getVelocity(){
         return driver.getSelectedSensorVelocity();
     }
