@@ -116,10 +116,10 @@ public class DriveCommand extends CommandBase {
     }
 
     public void printValues() {
-        SmartDashboard.putNumber("Encoder1", driveSubsystem.SwerveMod1FrontRight.getDegrees());
-        SmartDashboard.putNumber("Encoder2", driveSubsystem.SwerveMod2FrontLeft.getDegrees());
-        SmartDashboard.putNumber("Encoder3", driveSubsystem.SwerveMod3RearLeft.getDegrees());
-        SmartDashboard.putNumber("Encoder4", driveSubsystem.SwerveMod4RearRight.getDegrees());
+        SmartDashboard.putNumber("Encoder1", driveSubsystem.SwerveMod1FrontRight.getRotationInDegrees());
+        SmartDashboard.putNumber("Encoder2", driveSubsystem.SwerveMod2FrontLeft.getRotationInDegrees());
+        SmartDashboard.putNumber("Encoder3", driveSubsystem.SwerveMod3RearLeft.getRotationInDegrees());
+        SmartDashboard.putNumber("Encoder4", driveSubsystem.SwerveMod4RearRight.getRotationInDegrees());
         SmartDashboard.putNumber("RobotHeading", driveSubsystem.getHeading());
         SmartDashboard.putNumber("LeftStickX", oiSubsystem.getAxis(0, Constants.Axes.LEFT_STICK_X));
         SmartDashboard.putNumber("LeftStickY", oiSubsystem.getAxis(0, Constants.Axes.LEFT_STICK_Y));
