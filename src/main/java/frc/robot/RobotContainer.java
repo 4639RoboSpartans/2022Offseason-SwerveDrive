@@ -72,23 +72,8 @@ public class RobotContainer {
     final double kPYController = 1.5;
     final double kPThetaController = 3;
 
+    Trajectory trajectory = new AutonPath("pathplanner/generatedJSON/Path1Part1.wpilib.json").getTrajectory();
 
-    // 1. Create trajectory settings
-    TrajectoryConfig trajectoryConfig = new TrajectoryConfig(
-        Constants.kMaxSpeedMetersPerSecond,
-        Constants.kMaxAccelerationMetersPerSecondSquared)
-            .setKinematics(Constants.kDriveKinematics);
-
-    // 2. Generate trajectory
-    Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
-        new Pose2d(0, 0, new Rotation2d(0)),
-        List.of(
-            new Translation2d(1, 0),
-            new Translation2d(1, -1)),
-        new Pose2d(2, -1, Rotation2d.fromDegrees(180)),
-        trajectoryConfig);
-
-    // 3. Define PID controllers for tracking trajectory
     PIDController xController = new PIDController(kPXController, 0, 0);
     PIDController yController = new PIDController(kPYController, 0, 0);
     ProfiledPIDController thetaController = new ProfiledPIDController(
@@ -96,7 +81,6 @@ public class RobotContainer {
     );
     thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
-    // 4. Construct command to follow trajectory
     SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
         trajectory,
         m_drive::getPose,
@@ -107,7 +91,6 @@ public class RobotContainer {
         m_drive::setModuleStates,
         m_drive);
 
-    // 5. Add some init and wrap-up, and return everything
     return new SequentialCommandGroup(
         new InstantCommand(() -> m_drive.resetOdometry(trajectory.getInitialPose())),
         swerveControllerCommand,
