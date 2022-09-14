@@ -55,6 +55,9 @@ public final class Constants {
     public static final double kRamseteZeta = 5;
 	
 	public static final double kMaxSpeedMetersPerSecond = 3.5;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 3.5;
+	public static final double kMaxAngularAccelerationRadiansPerSecondSquared = Math.PI / 4;
+	public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI * 4 / 10;
 
     public enum Axes {
 		LEFT_STICK_X(0), LEFT_STICK_Y(1), LEFT_TRIGGER(2), RIGHT_TRIGGER(3), RIGHT_STICK_X(4), RIGHT_STICK_Y(5);

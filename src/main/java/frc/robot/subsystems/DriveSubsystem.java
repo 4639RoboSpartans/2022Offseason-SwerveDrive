@@ -41,18 +41,34 @@ public class DriveSubsystem extends SubsystemBase {
         m_odometry=new SwerveDriveOdometry(m_kinematics,
         navx.getRotation2d());
     }
+
     public void zeroHeading() {
         navx.reset();
     }
+
     public double getHeading() {
         if(navx.getAngle()%360<0){
             return (navx.getAngle()%360)+360;
         }
         return navx.getAngle()%360;
     }
+
     public double getHeadingRadians(){
         return Math.toRadians(getHeading());
     }
+
+    public Rotation2d getHeadingRotation(){
+        return Rotation2d.fromDegrees(getHeading());
+    }
+
+    public Pose2d getPose(){
+        return odometer.getPoseMeters();
+    }
+
+    public void resetOdometry(Pose2d pose){
+        odometer.resetPosition(pose, Rotation2d.fromDegrees(getHeading()));
+    }
+
     public void stop(){
         SwerveMod1FrontRight.stop();
         SwerveMod2FrontLeft.stop();
@@ -100,13 +116,5 @@ public class DriveSubsystem extends SubsystemBase {
             SwerveMod1FrontRight.getState(), SwerveMod2FrontLeft.getState(),
             SwerveMod3RearLeft.getState(), SwerveMod4RearRight.getState()
         );
-    }
-
-    public void resetOdometry(Pose2d pose){
-        odometer.resetPosition(pose, Rotation2d.fromDegrees(getHeading()));
-    }
-
-    public Pose2d getPose(){
-        return odometer.getPoseMeters();
     }
 }
