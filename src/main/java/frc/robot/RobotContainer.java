@@ -4,18 +4,11 @@
 
 package frc.robot;
 
-import java.util.List;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 
 import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -25,6 +18,8 @@ import edu.wpi.first.wpilibj2.command.*;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+
+import com.pathplanner.lib.*;
 
 
 /**
@@ -72,7 +67,7 @@ public class RobotContainer {
     final double kPYController = 1.5;
     final double kPThetaController = 3;
 
-    Trajectory trajectory = new AutonPath("pathplanner/generatedJSON/Path1Part1.wpilib.json").getTrajectory();
+    Trajectory trajectory = PathPlanner.loadPath("/pathplanner/TestPath1.path", Constants.kMaxSpeedMetersPerSecond, Constants.kMaxAccelerationMetersPerSecondSquared);
 
     PIDController xController = new PIDController(kPXController, 0, 0);
     PIDController yController = new PIDController(kPYController, 0, 0);
