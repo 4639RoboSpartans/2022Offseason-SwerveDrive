@@ -54,7 +54,7 @@ public final class Constants {
 	public static final double kRamseteB = 3.5;
     public static final double kRamseteZeta = 5;
 	
-	public static final double kMaxSpeedMetersPerSecond = 3.5;
+	public static final double kMaxSpeedMetersPerSecond = 1.0;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3.5;
 	public static final double kMaxAngularAccelerationRadiansPerSecondSquared = Math.PI / 4;
 	public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI * 4 / 10;

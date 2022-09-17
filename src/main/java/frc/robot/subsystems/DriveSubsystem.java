@@ -76,6 +76,13 @@ public class DriveSubsystem extends SubsystemBase {
         SwerveMod4RearRight.stop();
     }
 
+    public void resetAnglesAndPositions(){
+        SwerveMod1FrontRight.resetAngleAndPosition();
+        SwerveMod2FrontLeft.resetAngleAndPosition();
+        SwerveMod3RearLeft.resetAngleAndPosition();
+        SwerveMod4RearRight.resetAngleAndPosition();
+    }
+
     public void setModule1(double speed, double rotation){
         SwerveMod1FrontRight.setDesiredState(new SwerveModuleState(speed, Rotation2d.fromDegrees(rotation)));
     }

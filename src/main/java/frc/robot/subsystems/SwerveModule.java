@@ -34,8 +34,6 @@ public class SwerveModule {
         modEnc = new CANCoder(channel);
 
         pid = new PIDController(kp, ki, kd);
-
-        modEnc.setPosition(0);
     }
 
     public double getRotationInDegrees(){
@@ -75,6 +73,12 @@ public class SwerveModule {
             setSpeed(optimized.speedMetersPerSecond);
             setDegrees(optimized.angle.getDegrees());
         }
+    }
+
+    public void resetAngleAndPosition(){
+        SwerveModuleState optimized = optimize(new SwerveModuleState());
+        setSpeed(0);
+        setDegrees(optimized.angle.getDegrees());
     }
     
     private static boolean isNegligible(SwerveModuleState state){
