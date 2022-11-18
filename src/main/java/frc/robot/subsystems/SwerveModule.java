@@ -15,8 +15,8 @@ public class SwerveModule {
     private CANCoder modEnc;
     private PIDController pid;
 
-    private double kp=0.05;//0.07;
-    private double ki=0.1;
+    private double kp=0.09;
+    private double ki=0.15;
     private int kd=0;
 
     public SwerveModule(int driverInd, int rotateInd, int channel){
@@ -32,12 +32,16 @@ public class SwerveModule {
         driver.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
         modEnc = new CANCoder(channel);
+        double rot = modEnc.getPosition();
+        modEnc.configFactoryDefault();
+        modEnc.setPosition(rot);
 
         pid = new PIDController(kp, ki, kd);
     }
 
     public double getRotationInDegrees(){
-        return modToRange(modEnc.getPosition(), -180, 180);
+        // return modToRange(modEnc.getPosition(), -180, 180);
+        return Math.floor(modToRange(modEnc.getPosition(), -180, 180) * 2) / 2;
     }
 
     private void setSpeed(double speed){
@@ -76,9 +80,8 @@ public class SwerveModule {
     }
 
     public void resetAngleAndPosition(){
-        SwerveModuleState optimized = optimize(new SwerveModuleState());
         setSpeed(0);
-        setDegrees(optimized.angle.getDegrees());
+        setDegrees(0);
     }
     
     private static boolean isNegligible(SwerveModuleState state){

@@ -24,7 +24,6 @@ public class DriveCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double FWD, STR, RCW;
         double wa1 = 0, wa2 = 0, wa3 = 0, wa4 = 0;
 
         printValues();
